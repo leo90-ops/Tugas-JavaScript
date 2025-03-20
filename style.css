@@ -1,18 +1,39 @@
+body {
+    font-family: Arial, sans-serif;
+}
 
-        body {
-            font-family: Arial, sans-serif;
-        }
-        .container {
-            border: 1px solid black;
-            padding: 20px;
-            width: 350px;
-        }
-        input {
-            width: 200px;
-            padding: 5px;
-            margin-bottom: 10px;
-        }
-        button {
-            padding: 5px 15px;
-            cursor: pointer;
-        }
+header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+header img {
+    width: 105px;
+    height: 105px;
+    border-radius: 50%;
+}
+
+.container {
+    border: 1px solid black;
+    padding: 20px;
+    width: 350px;
+    margin-bottom: 20px;
+}
+
+input {
+    width: 200px;
+    padding: 5px;
+    margin-bottom: 10px;
+}
+
+button {
+    padding: 5px 15px;
+    cursor: pointer;
+}
+
+.hasil-container {
+    border: 1px solid black;
+    padding: 10px;
+    width: 400px;
+    display: none;
+}

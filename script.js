@@ -30,7 +30,8 @@ function prosesData() {
 
 function submitData() {
     let nama = document.getElementById("nama").value;
-    let inputs = document.querySelectorAll("#inputContainer input");
+    let jumlah = document.getElementById("jumlah").value;
+    let inputs = document.querySelectorAll("#inputContainer input[type='text']");
     let pilihanArray = [];
 
     if (nama.trim() === "") {
@@ -55,6 +56,7 @@ function submitData() {
 
     // Tampilkan sebagai Radio Button
     let radioContainer = document.createElement("div");
+    radioContainer.id = "radioContainer";
     pilihanArray.forEach((pilihan, index) => {
         let radio = document.createElement("input");
         radio.type = "radio";
@@ -71,6 +73,9 @@ function submitData() {
         radioContainer.appendChild(document.createElement("br"));
     });
 
+    container.appendChild(radioContainer);
+    container.appendChild(document.createElement("br"));
+
     // Tampilkan sebagai Dropdown
     let dropdown = document.createElement("select");
     dropdown.id = "dropdownPilihan";
@@ -81,27 +86,33 @@ function submitData() {
         dropdown.appendChild(option);
     });
 
-    container.appendChild(radioContainer);
-    container.appendChild(document.createElement("br"));
-
-    // Tambahkan tombol untuk menampilkan dropdown
-    let dropdownToggle = document.createElement("a");
-    dropdownToggle.href = "#";
-    dropdownToggle.innerText = "[Atau dalam bentuk Drop Down]";
-    dropdownToggle.onclick = function () {
-        dropdown.style.display = dropdown.style.display === "none" ? "block" : "none";
-    };
-    container.appendChild(dropdownToggle);
-    container.appendChild(document.createElement("br"));
     container.appendChild(dropdown);
-    dropdown.style.display = "none";
+    container.appendChild(document.createElement("br"));
 
     // Tambahkan tombol OK
     let okButton = document.createElement("button");
     okButton.innerText = "OK";
     okButton.onclick = function () {
-        alert("Pilihan Anda telah disimpan!");
+        let selectedRadio = document.querySelector('input[name="pilihanRadio"]:checked');
+        let selectedDropdown = dropdown.value;
+
+        if (!selectedRadio) {
+            alert("Silakan pilih salah satu pilihan terlebih dahulu!");
+            return;
+        }
+
+        let hasil = `Hallo, nama saya ${nama}, saya mempunyai sejumlah ${jumlah} pilihan yaitu ${pilihanArray.join(", ")}, dan saya memilih ${selectedRadio.value}.`;
+        
+        // Tampilkan hasil di bawah tombol OK
+        let resultContainer = document.getElementById("resultContainer");
+        if (!resultContainer) {
+            resultContainer = document.createElement("p");
+            resultContainer.id = "resultContainer";
+            container.appendChild(resultContainer);
+        }
+        resultContainer.innerText = hasil;
     };
+
     container.appendChild(document.createElement("br"));
     container.appendChild(okButton);
 }
